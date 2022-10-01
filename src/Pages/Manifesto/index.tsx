@@ -7,7 +7,7 @@ export function Manifesto() {
     return (
         <div className="cr-manifesto">
             <h1>MANIFESTO DE CARGA E SERVIÇO!</h1>
-            <form className="cr-manifesto__form" onSubmit={() => console.log("enviado O FORMULARIO DO FELIPE COCOZAO")}>
+            <form className="cr-manifesto__form" onSubmit={() => console.log("enviado O FORMULARIO DO FELIPE")}>
                 <div className="cr-manifesto__form-basicos">
                     <div>
                         <label>
