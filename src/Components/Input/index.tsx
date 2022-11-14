@@ -5,7 +5,7 @@ type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputEle
 export function Input(props: InputProps) {
     return (
         <div className="cr-input">
-            <input type={props.type} placeholder={props.placeholder} />
+            <input type={props.type} placeholder={props.placeholder} onChange={props.onChange} />
         </div>
     )
 }

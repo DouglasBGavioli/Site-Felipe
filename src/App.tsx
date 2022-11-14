@@ -3,6 +3,7 @@ import { Header } from "./Components/Header";
 import { Home } from "./Pages/Home";
 import "./globalStyle.css"
 import { Manifesto } from "./Pages/Manifesto";
+import { Historico } from "./Pages/Historico";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
 
         <Route index element={<Home />} />
         <Route path={"/manifesto"} element={<Manifesto />} />
+        <Route path={"/historico"} element={<Historico />} />
 
         {/* <Route path="contact" element={<Contact />} /> */}
 

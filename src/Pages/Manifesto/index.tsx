@@ -1,18 +1,51 @@
 import "./style.min.css"
 
 import { Input } from "../../Components/Input";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 
 export function Manifesto() {
+    const [data, setData] = useState("")
+    const [operador, setOperador] = useState("")
+
+
+    // useEffect(() => {
+    //     axios.post('http://localhost:3001/posts', {
+    //         data: data,
+    //     })
+    //         .then(function (response) {
+    //             console.log(response);
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // }, [data])
+
+    function onSubmit() {
+        axios.post('http://localhost:3001/posts', {
+            data: data,
+            operador: operador
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
     return (
         <div className="cr-manifesto">
             <h1>MANIFESTO DE CARGA E SERVIÇO!</h1>
-            <form className="cr-manifesto__form" onSubmit={() => console.log("enviado O FORMULARIO DO FELIPE COCOZAO")}>
+            <div className="cr-manifesto__form" >
                 <div className="cr-manifesto__form-basicos">
                     <div>
                         <label>
                             Data
-                            <Input type={"date"} />
+                            <Input type={"date"} placeholder="Selecione a data" onChange={(e) => {
+                                setData(e.target.value)
+                            }} />
                         </label>
                         <label>
                             Nome do cliente
@@ -30,7 +63,9 @@ export function Manifesto() {
                         </label>
                         <label>
                             Operador
-                            <Input placeholder="Digite o nome do operador" />
+                            <Input placeholder="Digite o nome do operador" onChange={(e) => {
+                                setOperador(e.target.value)
+                            }} />
                         </label>
                         <label>
                             Telefone
@@ -77,7 +112,7 @@ export function Manifesto() {
                             <p>Litros de diesel abastecidos no dia</p>
                             <Input type={"number"} placeholder="Quantidade de combustivel" />
                         </div>
-                        <button type="submit">Enviar</button>
+                        <button onClick={onSubmit}>Enviar</button>
                     </div>
                     <div className="cr-manifesto__form-carro-manutencoes">
                         <p>Anotação das manutenções</p>
@@ -85,7 +120,11 @@ export function Manifesto() {
                     </div>
                 </div>
 
-            </form>
+            </div>
         </div>
     )
+}
+
+function uuid_v4(): any {
+    throw new Error("Function not implemented.");
 }
