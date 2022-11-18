@@ -1,30 +1,36 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { Input } from "../../Components/Input";
 
 export function Historico() {
-    const [data, setData] = useState("")
-    const [operador, setOperador] = useState("")
+    const [data, setData] = useState<any>([])
+    const [operator, setOperator] = useState("")
 
     useEffect(() => {
         axios.get('http://localhost:3001/posts', {
         })
             .then(function (response) {
-                console.log(response);
-                setData(response.data[0].data)
-                setOperador(response.data[2].operador)
+                setData(response.data)
             })
             .catch(function (error) {
                 console.log(error);
             });
     }, [])
 
+    const verifica = useCallback(() => {
+        data.map((e: any) => {
+            if (e.mainDatas.operator === operator) {
+                return console.log(e)
+            } else {
+                return console.log("nao encontrado");
+            }
+        })
+    }, [operator, data])
 
     return (
         <div>
-            <p>DATA</p>
-            <span>{data}</span>
-            <p>OPERADOR</p>
-            <span>{operador}</span>
+            <Input value={operator} onChange={(e) => setOperator(e.target.value)} />
+            <button onClick={() => verifica()}>Verifica</button>
         </div>
     )
 }

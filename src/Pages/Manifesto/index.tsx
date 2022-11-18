@@ -2,30 +2,35 @@ import "./style.min.css"
 
 import { Input } from "../../Components/Input";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
+
+const INITIAL_DATA = {
+    data: "",
+    clientName: "",
+    addres: "",
+    equipamentName: "",
+    operator: "",
+    phone: "",
+    timeInitial: 0,
+    timeFinal: 0,
+    servicePay: false,
+    timePreco: 0,
+    obs: "",
+    fuel: "",
+    notes: ""
+}
 
 export function Manifesto() {
-    const [data, setData] = useState("")
-    const [operador, setOperador] = useState("")
+    const [data, setData] = useState(INITIAL_DATA)
 
+    function handleChangeData(e: ChangeEvent<HTMLInputElement>) {
+        setData({ ...data, [e.target.name]: e.target.value })
+    }
 
-    // useEffect(() => {
-    //     axios.post('http://localhost:3001/posts', {
-    //         data: data,
-    //     })
-    //         .then(function (response) {
-    //             console.log(response);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-    // }, [data])
-
-    function onSubmit() {
+    const onSubmit = useCallback(() => {
         axios.post('http://localhost:3001/posts', {
-            data: data,
-            operador: operador
+            mainDatas: data,
         })
             .then(function (response) {
                 console.log(response);
@@ -33,43 +38,43 @@ export function Manifesto() {
             .catch(function (error) {
                 console.log(error);
             });
-    }
+    }, [data])
 
     return (
         <div className="cr-manifesto">
             <h1>MANIFESTO DE CARGA E SERVIÇO!</h1>
-            <div className="cr-manifesto__form" >
+            <form className="cr-manifesto__form" onSubmit={onSubmit}>
                 <div className="cr-manifesto__form-basicos">
                     <div>
                         <label>
                             Data
-                            <Input type={"date"} placeholder="Selecione a data" onChange={(e) => {
-                                setData(e.target.value)
-                            }} />
+                            <Input type={"date"} id="data" placeholder="Selecione a data" value={data.data} name="data" onChange={handleChangeData} />
                         </label>
                         <label>
                             Nome do cliente
-                            <Input placeholder="Digite um nome" />
+                            <Input id="clientName" placeholder="
+                            Digite um nome" value={data.clientName} name="clientName" onChange={handleChangeData} />
                         </label>
                         <label>
                             Endereço
-                            <Input placeholder="Digite um endereço" />
+                            <Input id="addres" placeholder="
+                            Digite o endereço" value={data.addres} name="addres" onChange={handleChangeData} />
                         </label>
                     </div>
                     <div>
                         <label>
                             Nome do equipamento
-                            <Input placeholder="Digite o nome do equipamento" />
+                            <Input id="equipamentName" placeholder="
+                            Digite o nome do equipamento" value={data.equipamentName} name="equipamentName" onChange={handleChangeData} />
                         </label>
                         <label>
                             Operador
-                            <Input placeholder="Digite o nome do operador" onChange={(e) => {
-                                setOperador(e.target.value)
-                            }} />
+                            <Input id="operator" placeholder="
+                            Digite o nome do operador" value={data.operator} name="operator" onChange={handleChangeData} />
                         </label>
                         <label>
                             Telefone
-                            <Input type={"number"} placeholder="55-99999-9999" />
+                            <Input type={"number"} id="phone" value={data.phone} name="phone" placeholder="55-99999-9999" onChange={handleChangeData} />
                         </label>
                     </div>
                 </div>
@@ -78,31 +83,34 @@ export function Manifesto() {
                         <p>HORIMETRO</p>
                         <div className="horas">
                             Início
-                            <Input placeholder="Hora inicial" />
+                            <Input type={"time"} id="timeInitial" placeholder="
+                            Hora inicial" value={data.timeInitial} name="timeInitial" onChange={handleChangeData} />
                             Fim
-                            <Input placeholder="Hora final" />
+                            <Input type={"time"} id="timeFinal" placeholder="
+                            Hora final" value={data.timeFinal} name="timeFinal" onChange={handleChangeData} />
                         </div>
                     </label>
                     <label>
                         <p className="horas-trabalhadas">HORAS TRABALHADAS</p>
                         {/* (calculo inicio - fim) */}
-                        <span>21.3 Horas</span>
+                        <span>{ }</span>
                         <div className="cr-manifesto__form-horimetro-pago">
                             Serviço pago?
-                            <Input type={"checkbox"} className="checkbox" />
+                            <Input type={"checkbox"} id="servicePay" name="servicePay" onChange={() =>
+                                setData({ ...data, servicePay: !data.servicePay })} />
                         </div>
                     </label>
 
                     <label >
                         <p> VALOR TOTAL DO SERVIÇO</p>
                         Preço da hora
-                        <Input placeholder="Digite o preço da hora" />
+                        <Input type={"number"} id="timeFinal" placeholder="Digite o preço da hora" value={data.timePreco} name="timePreco" onChange={handleChangeData} />
                         {/* (calculo baseado no valor da hora) */}
-                        7.000.00
+                        <p>Valor do serviço: {(data.timePreco * 2)}</p>
                     </label>
                     <label >
                         OBSERVAÇÕES
-                        <textarea style={{ resize: "none" }} cols={30} rows={5} ></textarea>
+                        <textarea style={{ resize: "none" }} cols={30} rows={5} id="obs" name="obs" value={data.obs} onChange={(e: any) => handleChangeData(e)}></textarea>
                     </label>
                 </div>
                 <div className="cr-manifesto__form-carro">
@@ -110,21 +118,17 @@ export function Manifesto() {
                         <h1>Abastecimento</h1>
                         <div>
                             <p>Litros de diesel abastecidos no dia</p>
-                            <Input type={"number"} placeholder="Quantidade de combustivel" />
+                            <Input type={"number"} id="fuel" placeholder="Quantidade de combustivel" value={data.fuel} name="fuel" onChange={handleChangeData} />
                         </div>
-                        <button onClick={onSubmit}>Enviar</button>
+                        <button type="submit">Enviar</button>
                     </div>
                     <div className="cr-manifesto__form-carro-manutencoes">
                         <p>Anotação das manutenções</p>
-                        <textarea cols={50} rows={10}></textarea>
+                        <textarea style={{ resize: "none" }} cols={50} rows={10} id="notes" name="notes" value={data.notes} onChange={(e: any) => handleChangeData(e)}></textarea>
                     </div>
                 </div>
 
-            </div>
+            </form>
         </div>
     )
-}
-
-function uuid_v4(): any {
-    throw new Error("Function not implemented.");
 }
