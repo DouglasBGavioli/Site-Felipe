@@ -1,0 +1,210 @@
+.historic {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 450px;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 0 2rem;
+
+    h1 {
+        font-size: large;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border: 2px solid #f08f4a;
+        border-radius: 8px;
+        padding: 1rem;
+        align-items: center;
+
+        input {
+            height: 40px;
+            width: 200px;
+            padding: 0 0.5rem;
+            border-color: #f08f4a;
+            ;
+        }
+
+        button {
+            width: 100%;
+            height: 30px;
+            background-color: #fce8cb;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                transition: 0.3s ease-out;
+                background-color: #f08f4a;
+                color: #fff;
+
+            }
+        }
+    }
+
+    &__content {
+        &-manifesto {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            gap: 1rem;
+
+            h1 {
+                padding-top: 1rem;
+                font-weight: 600;
+            }
+
+            label {
+                font-weight: 600;
+
+                color: #db5b00;
+
+                h3 {
+                    color: #000;
+                    font-weight: 300;
+                }
+            }
+
+            &__form {
+                background-color: #fce8cb;
+                display: flex;
+                flex-direction: column;
+                padding: 0.5rem;
+                gap: 1rem;
+
+
+                &-basicos {
+                    display: flex;
+                    border-bottom: 1px solid #868686;
+                    padding: 1rem;
+                    justify-content: space-evenly;
+                    gap: 1rem;
+
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+                        width: 100%;
+
+                        label {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.2rem;
+                        }
+
+                        input::-webkit-outer-spin-button,
+                        input::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+                }
+
+                &-horimetro {
+                    display: flex;
+                    border-bottom: 1px solid #868686;
+                    padding: 1rem;
+
+                    &-pago {
+                        display: flex;
+                        gap: 0.3rem;
+                        flex-direction: row;
+                        align-items: center;
+
+                        .cr-input {
+                            input {
+                                margin-bottom: 0;
+
+                                &:focus-within {
+                                    outline: none
+                                }
+                            }
+                        }
+                    }
+
+                    label {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.8rem;
+
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0.5rem;
+
+                        .horas {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.5rem;
+                            align-items: center;
+                        }
+
+                        span {
+                            padding: 0.5rem;
+                            border: 1px solid #fff;
+                        }
+
+                        .horas-trabalhadas {
+                            padding-bottom: 10px;
+                        }
+                    }
+                }
+
+                &-carro {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1rem;
+
+                    &-abastecimento {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+
+                        h1,
+                        p {
+                            padding: 0;
+                            color: #db5b00;
+                        }
+
+                        div {
+                            display: flex;
+                            flex-direction: row;
+                            gap: 0.3rem;
+                        }
+
+                        button {
+                            margin-top: 2.5rem;
+                            padding: 1rem 0;
+                            background-color: #f08f4a;
+                            border: 2px solid transparent;
+                            cursor: pointer;
+
+                            &:hover {
+                                border: 2px solid #fff;
+                            }
+                        }
+                    }
+
+                    &-manutencoes {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+
+                        p {
+                            padding: 0;
+                            color: #db5b00;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

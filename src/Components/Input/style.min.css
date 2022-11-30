@@ -1,1 +1,1 @@
-.cr-input input{border:1px solid #3a3a3a;border-radius:4px;height:20px}.cr-input input:focus-within{outline:1px solid #f08f4a}
+.cr-input{display:flex;flex-direction:column;gap:.5rem}.cr-input input{border:1px solid #3a3a3a;border-radius:4px;height:20px}.cr-input input:focus-within{outline:1px solid #f08f4a}

@@ -1,5 +1,4 @@
 import "./style.min.css"
-
 import { Input } from "../../Components/Input";
 import axios from "axios";
 import { ChangeEvent, useCallback, useState } from "react";
@@ -38,6 +37,7 @@ export function Manifesto() {
             .catch(function (error) {
                 console.log(error);
             });
+
     }, [data])
 
     return (
